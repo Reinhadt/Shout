@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shout</title>
+    <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            var socket = io.connect('http://localhost:3000');
+        
+            $('.talkin').click(function(){
+                //var msg = "Hey listen!"
+                console.log("click");
+                console.log(socket.sockets);
+                socket.emit('listen', "Hey listen!");
+                socket.on('notify everyone', function(msg){
+                    notifyMe(msg);
+                })
+            });
+
+
+        function notifyMe(message) {
+		  // Let's check if the browser supports notifications
+		  if (!("Notification" in window)) {
+			alert("This browser does not support desktop notification");
+		  }
+		  // Let's check if the user is okay to get some notification
+		  else if (Notification.permission === "granted") {
+			// If it's okay let's create a notification
+		  var options = {
+				body: message,
+				dir : "ltr"
+			};
+		  var notification = new Notification("Te hablan", options);
+		  }
+		  // Otherwise, we need to ask the user for permission
+		  // Note, Chrome does not implement the permission static property
+		  // So we have to check for NOT 'denied' instead of 'default'
+		  /*else if (Notification.permission !== 'denied') {
+			Notification.requestPermission(function (permission) {
+			  // Whatever the user answers, we make sure we store the information
+			  if (!('permission' in Notification)) {
+				Notification.permission = permission;
+			  }
+			  // If the user is okay, let's create a notification
+			  if (permission === "granted") {
+				var options = {
+						body: message,
+						dir : "ltr"
+				};
+				var notification = new Notification("Te hablan",options);
+			  }
+			});
+		  }*/
+		  // At last, if the user already denied any notification, and you
+		  // want to be respectful there is no need to bother them any more.
+	}
+        });
+        
+    </script>
+</head>
+<body>
+    <div class="talkin">HEY LISTEN!</div>
+
+</body>
+</html>
