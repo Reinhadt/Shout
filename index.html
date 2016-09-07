@@ -57,10 +57,11 @@
 		  else if (Notification.permission === "granted") {
 			// If it's okay let's create a notification
 		  var options = {
-				body: message,
+				body: message.name,
 				dir : "ltr"
 			};
-		  var notification = new Notification("Te hablan", options);
+		  var notification = new Notification(message.message, options);
+          console.log(options);
 		  }
 		  // Otherwise, we need to ask the user for permission
 		  // Note, Chrome does not implement the permission static property
@@ -74,10 +75,11 @@
 			  // If the user is okay, let's create a notification
 			  if (permission === "granted") {
 				var options = {
-						body: message,
-						dir : "ltr"
+					body: message.name,
+                    dir : "ltr"
 				};
-				var notification = new Notification("Te hablan",options);
+				var notification = new Notification(message.message, options);
+                console.log(options);
 			  }
 			});
 		  }
