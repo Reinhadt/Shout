@@ -3,7 +3,9 @@
     margin: 0;
     font-family: 'Bungee Shade', cursive;
     /*background: #ffe16c;*/
-    background: #ffdc52;
+    /*background: #ffdc52;*/
+    /*background: #ffdc53;*/
+    background: #ffe581;
 }
 
 html, body{
@@ -20,4 +22,32 @@ html, body{
     -moz-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     cursor: pointer;
+    display:none;
+}
+input[type="text"]{
+  -webkit-appearance:none;
+   outline:none;
+   box-shadow: none !important;
+   border:none;
+   border-bottom:1px solid black;
+   display:block;
+   width:100%;
+   font-size:32px;
+}
+input[type="submit"]{
+  float: right;
+  padding: 10px;
+  font-size: 20px;
+  border:none;
+  box-shadow:none;
+  cursor:pointer;
+}
+form{
+  position: absolute;
+  top:50%;
+  left:50%;
+  -webkit-transform:translate(-50%, -50%);
+  -moztransform:translate(-50%, -50%);
+  transform:translate(-50%, -50%);
+  width:20%;
 }

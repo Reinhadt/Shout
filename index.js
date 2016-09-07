@@ -19,9 +19,24 @@ http.listen(3000, function(){
 io.on('connection', function(socket){
     console.log("USER CONNECTED!");
     //socket.join('Slap');
-    socket.on('listen', function(msg){
-        //io.to('Slap').emit('notify everyone', msg);
-        console.log(io.sockets.sockets);
-        socket.broadcast.emit('notify everyone', msg);
+
+    socket.on('get name', function(n){
+
+      if(n == "omar"){
+        //En lugar de hacer join a un room, obtengo el id de mi usuario y luego lo guardo
+        //entonces mando ese id a la función listen.
+        //socket.join(n);
+        identifier = socket.id;
+        console.log(socket.id);
+      }
+
     })
+
+    socket.on('listen', function(msg){
+
+        io.to(identifier).emit('notify everyone', msg);
+        //console.log(io.sockets.sockets);
+        //socket.broadcast.emit('notify everyone', msg);
+    });
+
 })
